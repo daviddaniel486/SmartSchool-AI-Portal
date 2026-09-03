@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "https://smart-school-api-tan.vercel.app/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ParentDashboard() {
 const [children, setChildren] = useState([]);

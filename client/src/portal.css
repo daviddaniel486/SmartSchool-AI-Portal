@@ -1,0 +1,117 @@
+/* Smart School visual system: restrained, information-first, and consistent across roles. */
+#root { width: 100%; max-width: none; margin: 0; text-align: left; }
+.portal-page { min-height: 100dvh !important; color: var(--portal-text) !important; font-family: var(--portal-font) !important; }
+.portal-page h1,.portal-page h2,.portal-page h3,.portal-page h4 { font-family: var(--portal-heading) !important; color: var(--portal-text); }
+.portal-page button,.portal-page input,.portal-page select,.portal-page textarea { border-radius: var(--portal-radius-sm); }
+.portal-page input,.portal-page select,.portal-page textarea { border-color: var(--portal-border) !important; box-shadow: none !important; background: #fff !important; }
+.portal-page input:focus,.portal-page select:focus,.portal-page textarea:focus { border-color: #8ba9d0 !important; outline: 3px solid rgba(36,87,166,.10) !important; }
+
+/* ADMIN */
+.portal-admin { background: var(--portal-bg) !important; }
+.portal-admin .sidebar { width: 248px !important; background: #172033 !important; border-right: 0 !important; }
+.portal-admin .brand { padding: 22px 20px !important; border-bottom-color: rgba(255,255,255,.08) !important; }
+.portal-admin .brand-icon { width:38px !important;height:38px !important;border-radius:9px !important;background:var(--portal-primary) !important;box-shadow:none !important; }
+.portal-admin .nav { padding: 18px 12px !important; }
+.portal-admin .nav-label { color:#8f99ab !important;font-size:10px !important;letter-spacing:.08em !important; }
+.portal-admin .nav-item { border-radius:8px !important;padding:10px 12px !important;color:#c4cad5 !important;margin-bottom:3px !important; }
+.portal-admin .nav-item.active { background:rgba(255,255,255,.09) !important;color:#fff !important; }
+.portal-admin .nav-icon { color:#aeb8c8 !important;font-size:14px !important; }
+.portal-admin .nav-item.active .nav-icon { color:#fff !important; }
+.portal-admin .logout-button { border-radius:8px !important;background:rgba(255,255,255,.06) !important;color:#d6dbe4 !important; }
+.portal-admin .main-content { margin-left:248px !important;width:calc(100% - 248px) !important; }
+.portal-admin .topbar { height:70px !important;padding:0 30px !important;background:#fff !important;border-bottom:1px solid var(--portal-border) !important;box-shadow:none !important; }
+.portal-admin .content { max-width:1280px !important;padding:28px 30px 56px !important; }
+.portal-admin .welcome { min-height:148px !important;border-radius:12px !important;padding:28px 30px !important;background:var(--portal-primary-dark) !important;box-shadow:none !important; }
+.portal-admin .welcome h1 { font-size:clamp(23px,2.2vw,32px) !important; }
+.portal-admin .welcome p { color:#d5e0f0 !important; }
+.portal-admin .stats-grid { gap:14px !important; }
+.portal-admin .stat-card { border-radius:10px !important;border:1px solid var(--portal-border) !important;border-left-width:3px !important;box-shadow:var(--portal-shadow) !important; }
+.portal-admin .stat-card:hover { transform:none !important;box-shadow:var(--portal-shadow) !important; }
+.portal-admin .section { border-radius:10px !important;border:1px solid var(--portal-border) !important;box-shadow:none !important;overflow:hidden; }
+.portal-admin .section-header { background:#fff !important;border-bottom:1px solid var(--portal-border) !important; }
+.portal-admin .section-body { background:#fff !important; }
+.portal-admin .item-card { border-radius:9px !important;box-shadow:none !important;border-color:var(--portal-border) !important; }
+.portal-admin .item-card:hover { transform:none !important;box-shadow:var(--portal-shadow) !important; }
+.portal-admin .primary-button { border-radius:8px !important;box-shadow:none !important; }
+
+/* TEACHER */
+.portal-teacher { background:var(--portal-bg) !important; }
+.portal-teacher > header { background:#fff !important;color:var(--portal-text) !important;padding:0 30px !important;min-height:70px !important;height:auto !important;border-bottom:1px solid var(--portal-border) !important;box-shadow:none !important;position:sticky;top:0;z-index:20; }
+.portal-teacher > header h1 { color:var(--portal-text) !important;font-size:18px !important; }
+.portal-teacher > header p { color:var(--portal-muted) !important; }
+.portal-teacher > header button { background:var(--portal-primary) !important;color:#fff !important;border:0 !important;padding:9px 14px !important;box-shadow:none !important; }
+.portal-teacher > main { max-width:1180px !important;padding:30px !important; }
+.portal-teacher > main > div { border-radius:10px !important;box-shadow:var(--portal-shadow) !important;border:1px solid var(--portal-border) !important; }
+.portal-teacher > main > div:first-child { padding:22px !important; }
+.portal-teacher > main h2 { color:var(--portal-text) !important; }
+.portal-teacher > main p { color:var(--portal-muted); }
+.portal-teacher > main button { border-radius:8px !important;box-shadow:none !important; }
+.portal-teacher > main button:not(:disabled):hover { transform:translateY(-1px); }
+
+/* STUDENT */
+.portal-student { background:var(--portal-bg) !important; }
+.portal-student > header { background:#fff !important;color:var(--portal-text) !important;padding:12px 30px !important;min-height:70px !important;border-bottom:1px solid var(--portal-border) !important;box-shadow:none !important; }
+.portal-student > header > div:first-child > div:first-child { width:38px !important;height:38px !important;border-radius:9px !important;background:var(--portal-primary) !important;color:#fff !important;box-shadow:none !important;font-size:19px !important; }
+.portal-student > header h1 { color:var(--portal-text) !important;font-size:18px !important; }
+.portal-student > header p { color:var(--portal-muted) !important; }
+.portal-student > header .student-name { color:var(--portal-text) !important; }
+.portal-student > header button { background:var(--portal-primary) !important;color:#fff !important;border:0 !important;box-shadow:none !important;border-radius:8px !important; }
+.portal-student > main { max-width:1180px !important;padding:30px !important; }
+.portal-student > main > section:first-child { background:#fff !important;color:var(--portal-text) !important;border:1px solid var(--portal-border) !important;border-radius:12px !important;padding:28px 30px !important;box-shadow:none !important; }
+.portal-student > main > section:first-child h2 { color:var(--portal-text) !important;font-size:clamp(24px,3vw,34px) !important; }
+.portal-student > main > section:first-child p { color:var(--portal-muted) !important; }
+.portal-student > main > section:first-child > div[style*="borderRadius"] { opacity:0 !important; }
+.portal-student .stat-card { border-radius:10px !important;box-shadow:var(--portal-shadow) !important;border:1px solid var(--portal-border) !important;border-left-width:3px !important; }
+.portal-student .stat-card:hover { transform:none !important; }
+.portal-student .assignment-card { border-radius:10px !important;box-shadow:var(--portal-shadow) !important;border-color:var(--portal-border) !important; }
+
+/* PARENT */
+.portal-parent { background:var(--portal-bg) !important; }
+.portal-parent .sidebar { width:248px !important;background:#172033 !important;border-right:0 !important; }
+.portal-parent .brand { height:70px !important;padding:0 20px !important;border-bottom-color:rgba(255,255,255,.08) !important; }
+.portal-parent .brandMark { width:36px !important;height:36px !important;border-radius:9px !important;background:var(--portal-primary) !important; }
+.portal-parent .brandName { color:#fff !important; }
+.portal-parent .brandSub { color:#9aa5b6 !important; }
+.portal-parent .sidebarSection { padding:18px 12px !important; }
+.portal-parent .sidebarLabel { color:#8f99ab !important; }
+.portal-parent .sidebarButton { border-radius:8px !important;color:#c4cad5 !important; }
+.portal-parent .sidebarButtonActive { background:rgba(255,255,255,.09) !important;color:#fff !important; }
+.portal-parent .menuCount { background:rgba(255,255,255,.08) !important;color:#c4cad5 !important; }
+.portal-parent .menuCountActive { background:var(--portal-primary) !important;color:#fff !important; }
+.portal-parent .logoutButton { color:#d6dbe4 !important;border-color:rgba(255,255,255,.10) !important;background:rgba(255,255,255,.05) !important; }
+.portal-parent .main { margin-left:248px !important; }
+.portal-parent .topbar { height:70px !important;padding:0 30px !important; }
+.portal-parent .content { max-width:1280px !important;padding:28px 30px 56px !important; }
+.portal-parent .welcome { min-height:148px !important;border-radius:12px !important;padding:28px 30px !important;background:var(--portal-primary-dark) !important;box-shadow:none !important; }
+.portal-parent .pageTitle { font-size:28px !important; }
+.portal-parent .statCard,.portal-parent .childCard,.portal-parent .composeCard,.portal-parent .contactInfo,.portal-parent .detailBlock { border-radius:10px !important;box-shadow:var(--portal-shadow) !important;border-color:var(--portal-border) !important; }
+
+/* Login: keep the existing two-panel layout, but make it calmer. */
+.login-brand-panel { background:#173b73 !important; }
+.login-form-panel { background:#fff !important; }
+.login-form-panel input { border-radius:8px !important; }
+
+@media (max-width:900px) {
+  .portal-admin .sidebar,.portal-parent .sidebar { width:70px !important; }
+  .portal-admin .main-content { margin-left:70px !important;width:calc(100% - 70px) !important; }
+  .portal-parent .main { margin-left:70px !important; }
+  .portal-admin .brand h2,.portal-admin .brand span,.portal-admin .nav-item span:not(.nav-icon),.portal-admin .nav-label,.portal-admin .logout-button span,
+  .portal-parent .brandName,.portal-parent .brandSub,.portal-parent .sidebarLabel,.portal-parent .sidebarButton > span:not(.menuIcon),.portal-parent .helpCard,.portal-parent .logoutButton span:not(:first-child) { display:none !important; }
+  .portal-admin .nav-item,.portal-parent .sidebarButton { justify-content:center !important; }
+  .portal-admin .content,.portal-parent .content { padding:24px 20px 48px !important; }
+}
+@media (max-width:680px) {
+  .portal-teacher > header,.portal-student > header { padding:11px 16px !important; }
+  .portal-teacher > main,.portal-student > main { padding:20px 16px 40px !important; }
+  .portal-admin .topbar,.portal-parent .topbar { padding:0 16px !important; }
+  .portal-admin .content,.portal-parent .content { padding:20px 14px 40px !important; }
+  .portal-admin .welcome,.portal-parent .welcome,.portal-student > main > section:first-child { padding:22px 20px !important; }
+  .portal-admin .stats-grid,.portal-admin .item-grid { grid-template-columns:1fr !important; }
+  .portal-parent .pageTitle { font-size:24px !important; }
+}
+@media (max-width:480px) {
+  .portal-admin .sidebar,.portal-parent .sidebar { width:0 !important;overflow:hidden !important; }
+  .portal-admin .main-content { margin-left:0 !important;width:100% !important; }
+  .portal-parent .main { margin-left:0 !important; }
+  .portal-admin .content,.portal-parent .content { padding-inline:12px !important; }
+}

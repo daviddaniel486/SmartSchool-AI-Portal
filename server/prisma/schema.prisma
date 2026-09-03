@@ -1,0 +1,246 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+  PARENT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  DROPPED
+}
+
+enum SubmissionStatus {
+  PENDING
+  SUBMITTED
+  GRADED
+  LATE
+}
+
+enum ResultStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  password     String
+  firstName    String
+  lastName     String
+  role         UserRole
+  phone        String?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  student      Student?
+  teacher      Teacher?
+  parent       Parent?
+  messagesSent Message[] @relation("MessageSender")
+  messagesReceived Message[] @relation("MessageReceiver")
+  notifications Notification[]
+}
+
+model Student {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @unique
+  admissionNo String    @unique
+  dateOfBirth DateTime?
+  gender      Gender?
+  address     String?
+  classId     Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  class       Class?     @relation(fields: [classId], references: [id])
+  parentLinks ParentStudent[]
+  enrollments Enrollment[]
+  submissions Submission[]
+  results     Result[]
+}
+
+model Teacher {
+  id         Int       @id @default(autoincrement())
+  userId     Int       @unique
+  employeeNo String    @unique
+  department String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classes    Class[]
+  subjects   Subject[]
+  courses    Course[]
+  assignments Assignment[]
+}
+
+model Parent {
+  id        Int       @id @default(autoincrement())
+  userId    Int       @unique
+  address   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  students  ParentStudent[]
+}
+
+model ParentStudent {
+  parentId  Int
+  studentId Int
+  createdAt DateTime @default(now())
+
+  parent  Parent  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@id([parentId, studentId])
+}
+
+model Class {
+  id        Int      @id @default(autoincrement())
+  name      String
+  level     String?
+  teacherId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacher   Teacher?  @relation(fields: [teacherId], references: [id])
+  students  Student[]
+  subjects  Subject[]
+  courses   Course[]
+}
+
+model Subject {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String   @unique
+  teacherId Int?
+  classId   Int?
+  createdAt DateTime @default(now())
+
+  teacher   Teacher? @relation(fields: [teacherId], references: [id])
+  class     Class?   @relation(fields: [classId], references: [id])
+  results   Result[]
+}
+
+model Course {
+  id          Int      @id @default(autoincrement())
+  title       String
+  code        String   @unique
+  description String?
+  teacherId   Int?
+  classId     Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  teacher     Teacher?     @relation(fields: [teacherId], references: [id])
+  class       Class?       @relation(fields: [classId], references: [id])
+  enrollments Enrollment[]
+  assignments Assignment[]
+}
+
+model Enrollment {
+  id        Int              @id @default(autoincrement())
+  studentId Int
+  courseId  Int
+  status    EnrollmentStatus @default(ACTIVE)
+  enrolledAt DateTime        @default(now())
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  course  Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, courseId])
+}
+
+model Assignment {
+  id          Int              @id @default(autoincrement())
+  title       String
+  description String?
+  courseId    Int
+  teacherId   Int?
+  dueDate     DateTime?
+  maxScore    Float            @default(100)
+  createdAt   DateTime         @default(now())
+
+  course     Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  teacher    Teacher?     @relation(fields: [teacherId], references: [id])
+  submissions Submission[]
+}
+
+model Submission {
+  id           Int              @id @default(autoincrement())
+  assignmentId Int
+  studentId    Int
+  content      String?
+  fileUrl      String?
+  score        Float?
+  feedback     String?
+  status       SubmissionStatus @default(PENDING)
+  submittedAt  DateTime?
+  gradedAt     DateTime?
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student    Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, studentId])
+}
+
+model Result {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  subjectId Int
+  session   String
+  term      String
+  score     Float
+  grade     String
+  remark    String?
+  status    ResultStatus @default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, subjectId, session, term])
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  subject    String?
+  content    String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

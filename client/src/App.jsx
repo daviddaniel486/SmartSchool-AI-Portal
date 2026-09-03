@@ -5,7 +5,7 @@ import TeacherDashboard from "./TeacherDashboard";
 import StudentDashboard from "./StudentDashboard";
 import ParentDashboard from "./ParentDashboard";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smart-school-api-tan.vercel.app/api";
 
 function App() {
   const [assignments, setAssignments] = useState([]);

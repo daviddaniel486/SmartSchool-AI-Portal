@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smart-school-api-tan.vercel.app/api";
 
 function AdminDashboard() {
   const [teachers, setTeachers] = useState([]);

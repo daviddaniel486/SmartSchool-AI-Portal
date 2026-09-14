@@ -21,7 +21,7 @@ setLoading(true);
 setError("");
 
 
-  const response = await fetch(`${API_URL}/assignments`, {
+  const response = await fetch(`${API_URL}/assignments/my`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

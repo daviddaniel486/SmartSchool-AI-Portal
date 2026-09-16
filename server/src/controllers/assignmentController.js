@@ -138,21 +138,6 @@ const getAssignments = async (req, res) => {
       },
     },
   },
-},submissions: {
-  include: {
-    student: {
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-          },
-        },
-      },
-    },
-  },
 },
       },
       orderBy: {

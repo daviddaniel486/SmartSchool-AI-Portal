@@ -8,12 +8,15 @@ const adminRoutes = require("./routes/adminRoutes");
 const teacherRoutes = require("./routes/teacherRoutes");
 const subjectRoutes = require("./routes/subjectRoutes");
 const courseRoutes = require("./routes/courseRoutes");
+const resultRoutes = require("./routes/resultRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const submissionRoutes = require("./routes/submissionRoutes");
 const classRoutes = require("./routes/classRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const parentRoutes = require("./routes/parentRoutes");
+const aiAssessmentRoutes = require("./routes/aiAssessmentRoutes");
+const aiStudentRoutes = require("./routes/aiStudentRoutes");
 
 const express = require("express");
 const cors = require("cors");
@@ -27,9 +30,21 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(helmet());
 
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:5173",
+  "http://localhost:5174",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
@@ -61,7 +76,9 @@ app.use("/api/submissions", submissionRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/parents", parentRoutes);
-
+app.use("/api/ai", aiAssessmentRoutes);
+app.use("/api/results", resultRoutes);
+app.use("/api/ai/student", aiStudentRoutes);
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({

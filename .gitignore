@@ -31,3 +31,8 @@ Thumbs.db
 # Prisma
 server/prisma/*.db
 server/prisma/*.db-journal
+# Database and restore backups
+*.dump
+backup_contents.txt
+restore_list.txt
+
